@@ -28,7 +28,7 @@ public class Client {
   public Client(String clientName, String email, String apiKey) {
     this.clientName = clientName;
     this.email = email;
-    this.apiKey = UUID.randomUUID().toString();
+    this.apiKey = apiKey;
   }
 
   public String getApiKey() {
