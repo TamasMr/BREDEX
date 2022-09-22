@@ -3,6 +3,7 @@ package com.example.jobsearch.services;
 import com.example.jobsearch.dtos.InputClientDTO;
 import com.example.jobsearch.dtos.OutputApiKeyDTO;
 import com.example.jobsearch.exceptions.InvalidEmailException;
+import com.example.jobsearch.exceptions.InvalidNameException;
 import com.example.jobsearch.models.Client;
 import com.example.jobsearch.repositories.ClientRepository;
 import java.util.UUID;
@@ -42,6 +43,9 @@ public class ClientServiceImpl implements ClientService {
   }
 
   private void validateEmail(String email) {
+    if (email == null || email.isEmpty() || email.isBlank()) {
+      throw new InvalidEmailException("Please give an email address!");
+    }
     if (clientRepository.existsByEmail(email)) {
       throw new InvalidEmailException("Email already registered!");
     }
@@ -53,8 +57,11 @@ public class ClientServiceImpl implements ClientService {
   }
 
   private void validateName(String name) {
+    if (name == null || name.isEmpty() || name.isBlank()) {
+      throw new InvalidNameException("Please give your name!");
+    }
     if (name.length() > 100) {
-      throw new com.example.jobsearch.exceptions.InvalidNameException("Name must be shorter than 100 characters!");
+      throw new InvalidNameException("Name must be shorter than 100 characters!");
     }
   }
 }
