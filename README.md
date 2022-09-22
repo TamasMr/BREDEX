@@ -13,3 +13,21 @@ Az alkalmazáshoz swagger-ui használata nem kötelező, de ajánlott.
 A fejlesztés után soroljon fel továbbfejlesztési lehetőségeket ezzel a projekttel kapcsolatban, hogy teljes mértékben production ready alkalmazás legyen és az üzemeltetés is elfogadja tőlünk ezt az alkalmazást.
 Készítsen rövid leírást az alkalmazásról, hogyan és milyen eszközökkel lehet bekonfigurálni és futtatni.
 
+5. api kulcs: lehetne kódolva tárolni, limiteket beállítani, lejárati időt beállítani (és valamilyen módon törölni lejárat után).
+6. kliens: törlés is lehetne, esetleg valamennyi inaktivitás után értesítő levél/automatikus törlés.
+7. állások: lehetne leírás is, esetleg azokat létrehozó kliens jelölése is / vagy cég/department.
+8. security: api kulcs mellett lehet springsecurity/oauth is.
+9. tesztek: unit, integration mindenképpen, security, environment.
+10. validateek: ha szétbontom jobban őket (pl emailt ellenőrző regexpet) lehet pontosabb visszajelzést is adni, hogy mi nem stimmel vele.
+
+Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2, illetve mysql lehetőségek), .env-ben lehet beállítani környezeti változókat.
+
+/client - needs json input clientName and clientEmail
+
+/position - (needs json input jobPosition and location) and apiKey as queryparam
+
+/position/search - needs keyWord, location, apiKey as queryparams. keyWord and location are not needed, can be empty or blank. If both are, then returns all positions.
+
+/position/{id} - needs id
+
+invalid inputs result in 400 response with error description.
