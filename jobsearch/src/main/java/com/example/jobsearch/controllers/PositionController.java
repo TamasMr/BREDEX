@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/position")
 public class PositionController {
 
   private final PositionService positionService;
@@ -26,18 +26,18 @@ public class PositionController {
     this.positionService = positionService;
   }
 
-  @PostMapping("/position")
+  @PostMapping("")
   public ResponseEntity<OutputUrlDTO> createNewPosition(@RequestBody InputPositionDTO newPosition, @RequestParam String apiKey) {
     return ResponseEntity.status(201).body(positionService.savePosition(apiKey, newPosition));
   }
 
-  @GetMapping("/position/search")
+  @GetMapping("/search")
   public ResponseEntity<List<OutputPositionDTO>> searchForPositions(@RequestParam(required = false) String keyWord,
       @RequestParam(required = false) String location, @RequestParam String apiKey) {
     return ResponseEntity.status(200).body(positionService.searchForPositions(apiKey, keyWord, location));
   }
 
-  @GetMapping("/position/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<OutputPositionDTO> findPosition(@PathVariable int id) {
     return ResponseEntity.status(200).body(positionService.findPosition(id));
   }

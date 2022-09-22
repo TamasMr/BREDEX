@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/client")
 public class ClientController {
 
   private final ClientService clientService;
@@ -21,7 +21,7 @@ public class ClientController {
     this.clientService = clientService;
   }
 
-  @PostMapping("/client")
+  @PostMapping("")
   public ResponseEntity<OutputApiKeyDTO> createNewClient(@RequestBody InputClientDTO newUser) {
     return ResponseEntity.status(201).body(clientService.saveUser(newUser));
   }
