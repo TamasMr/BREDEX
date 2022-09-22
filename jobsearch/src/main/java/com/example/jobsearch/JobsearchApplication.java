@@ -34,6 +34,14 @@ public class JobsearchApplication implements ApplicationRunner {
     SpringApplication.run(JobsearchApplication.class, args);
   }
 
+  @Bean
+  public Docket swaggerConfiguration() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("com.example.jobsearch"))
+        .build();
+  }
+
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
     clientRepository.save(new Client("Sarah Parker", "sarah-parker.work@gmail.cam", "eb9982ff-ef5f-4218-994a-2dacdf9cad08"));
