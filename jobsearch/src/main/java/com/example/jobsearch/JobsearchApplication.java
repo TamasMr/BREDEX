@@ -45,5 +45,6 @@ public class JobsearchApplication implements ApplicationRunner {
     positionRepository.save(
         new Position("senior ufo spotter", "hannover", new URL("https://whatever.com/hannover-senior_ufo_spotter-1004")));
     positionRepository.save(new Position("java dev", "braunschweig", new URL("https://whatever.com/braunschweig-java_dev-1005")));
+    System.out.println("Application started");
   }
 }

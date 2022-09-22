@@ -7,7 +7,7 @@ public class SimpleErrorDTO {
   public SimpleErrorDTO() {
   }
 
-  public SimpleErrorDTO(String message) {
+  public SimpleErrorDTO(String error) {
     this.error = error;
   }
 
