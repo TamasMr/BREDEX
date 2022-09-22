@@ -10,11 +10,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 public class JobsearchApplication implements ApplicationRunner {
@@ -31,7 +26,7 @@ public class JobsearchApplication implements ApplicationRunner {
   public static void main(String[] args) {
     SpringApplication.run(JobsearchApplication.class, args);
   }
-  
+
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
     clientRepository.save(new Client("Sarah Parker", "sarah-parker.work@gmail.cam", "eb9982ff-ef5f-4218-994a-2dacdf9cad08"));
