@@ -10,19 +10,21 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableSwagger2
 public class JobsearchApplication implements ApplicationRunner {
 
   private final ClientRepository clientRepository;
   private final PositionRepository positionRepository;
 
+  @Autowired
   public JobsearchApplication(ClientRepository clientRepository, PositionRepository positionRepository) {
     this.clientRepository = clientRepository;
     this.positionRepository = positionRepository;
   }
 
-  @Autowired
   public static void main(String[] args) {
     SpringApplication.run(JobsearchApplication.class, args);
   }
