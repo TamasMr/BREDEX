@@ -31,7 +31,7 @@ public class JobsearchApplication implements ApplicationRunner {
   public static void main(String[] args) {
     SpringApplication.run(JobsearchApplication.class, args);
   }
-
+  
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
     clientRepository.save(new Client("Sarah Parker", "sarah-parker.work@gmail.cam", "eb9982ff-ef5f-4218-994a-2dacdf9cad08"));
