@@ -21,8 +21,13 @@ Készítsen rövid leírást az alkalmazásról, hogyan és milyen eszközökkel
 10. validateek: ha szétbontom jobban őket (pl emailt ellenőrző regexpet) lehet pontosabb visszajelzést is adni, hogy mi nem stimmel vele.
 
 Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2, illetve mysql lehetőségek), .env-ben lehet beállítani környezeti változókat.
+
 /client - needs json input clientName and clientEmail
+
 /position - (needs json input jobPosition and location) and apiKey as queryparam
+
 /position/search - needs keyWord, location, apiKey as queryparams. keyWord and location are not needed, can be empty or blank. If both are, then returns all positions.
+
 /position/{id} - needs id
+
 invalid inputs result in 400 response with error description.
