@@ -13,3 +13,11 @@ Az alkalmazáshoz swagger-ui használata nem kötelező, de ajánlott.
 A fejlesztés után soroljon fel továbbfejlesztési lehetőségeket ezzel a projekttel kapcsolatban, hogy teljes mértékben production ready alkalmazás legyen és az üzemeltetés is elfogadja tőlünk ezt az alkalmazást.
 Készítsen rövid leírást az alkalmazásról, hogyan és milyen eszközökkel lehet bekonfigurálni és futtatni.
 
+5. api kulcs: lehetne kódolva tárolni, limiteket beállítani, lejárati időt beállítani (és valamilyen módon törölni lejárat után).
+6. kliens: törlés is lehetne, esetleg valamennyi inaktivitás után értesítő levél/automatikus törlés.
+7. állások: lehetne leírás is, esetleg azokat létrehozó kliens jelölése is / vagy cég/department.
+8. security: api kulcs mellett lehet springsecurity/oauth is.
+9. tesztek: unit, integration mindenképpen, security, environment.
+10. validateek: ha szétbontom jobban őket (pl emailt ellenőrző regexpet) lehet pontosabb visszajelzést is adni, hogy mi nem stimmel vele.
+
+Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2), .env-ben lehet beállítani környezeti változókat.
