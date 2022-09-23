@@ -31,3 +31,8 @@ Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (j
 /position/{id} - needs id
 
 invalid inputs result in 400 response with error description.
+
+
+Develop branch has unit tests for saveClient and a different approach for initial db population.
+
+ApiKeyInHashMap branch has the api keys in a hashmap instead of db. The hash map does not contain the initial db populations api keys (I did try to save them, but it seems the ApplicationRunner runs before the service is really created for runtime, and at runtime the hashmap is created again, deleting the previously populated one). Plan to move the initial population to the actual service from of the ApplicationRunner. Also this way the api keys will be deleted upon application restart, even if the db is switched from h2 to some sql server and from create-drop to update.
