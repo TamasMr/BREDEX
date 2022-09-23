@@ -23,6 +23,6 @@ public class ClientController {
 
   @PostMapping("")
   public ResponseEntity<OutputApiKeyDTO> createNewClient(@RequestBody InputClientDTO newUser) {
-    return ResponseEntity.status(201).body(clientService.saveUser(newUser));
+    return ResponseEntity.status(201).body(clientService.saveClient(newUser));
   }
 }

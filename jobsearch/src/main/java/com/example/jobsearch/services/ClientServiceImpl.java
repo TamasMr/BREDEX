@@ -21,7 +21,7 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
-  public OutputApiKeyDTO saveUser(InputClientDTO inputClientDto) {
+  public OutputApiKeyDTO saveClient(InputClientDTO inputClientDto) {
     validateInputClientDto(inputClientDto);
     UUID apiKey = createApiKey();
     Client clientToSave = new Client(inputClientDto.getClientName(), inputClientDto.getClientEmail(), apiKey.toString());

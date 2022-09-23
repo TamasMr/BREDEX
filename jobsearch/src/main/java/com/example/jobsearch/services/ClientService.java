@@ -5,5 +5,5 @@ import com.example.jobsearch.dtos.OutputApiKeyDTO;
 
 public interface ClientService {
 
-  OutputApiKeyDTO saveUser(InputClientDTO inputClientDto);
+  OutputApiKeyDTO saveClient(InputClientDTO inputClientDto);
 }
