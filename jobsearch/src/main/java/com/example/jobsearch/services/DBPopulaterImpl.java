@@ -7,6 +7,8 @@ import com.example.jobsearch.repositories.PositionRepository;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,12 +23,15 @@ public class DBPopulaterImpl implements DBPopulater {
     this.positionRepository = positionRepository;
   }
 
+  @EventListener(ApplicationReadyEvent.class)
+  @Override
   public void populateDB() throws MalformedURLException {
     populateClients();
     populatePositions();
+    System.out.println("Application started!");
   }
 
-  public void populateClients(){
+  private void populateClients() {
     clientRepository.save(new Client("Sarah Parker", "sarah-parker.work@gmail.cam", "eb9982ff-ef5f-4218-994a-2dacdf9cad08"));
     clientRepository.save(new Client("Edward Parker", "edward-parker.work@gmail.cam", "b8f7d459-5033-47d2-880f-0fedd959ceb5"));
     clientRepository.save(new Client("Blake Johnson", "blake-johnson.home@gmail.can", "70357d90-c858-4b03-b0e2-05e66329f0ce"));
@@ -35,7 +40,7 @@ public class DBPopulaterImpl implements DBPopulater {
     clientRepository.save(new Client("Adam Sikorsky", "adam-sikorsky.work@gmail.con", "2c44bf66-073d-4f70-a002-9d55b8c04eee"));
   }
 
-  public void populatePositions() throws MalformedURLException {
+  private void populatePositions() throws MalformedURLException {
     Position pos1 = new Position("junior java developer", "budapest");
     pos1.setUrl(new URL("https://whatever.com/budapest-junior_java_developer-1"));
     positionRepository.save(pos1);

@@ -73,7 +73,7 @@ public class PositionServiceImpl implements PositionService {
   @Override
   public List<OutputPositionDTO> searchForPositions(String apiKey, String keyWord, String location) {
     validateApiKey(apiKey);
-    if ((keyWord == null || keyWord.isEmpty() || keyWord.isBlank()) && (location == null || location.isEmpty() || location.isBlank())){
+    if ((keyWord == null || keyWord.isEmpty() || keyWord.isBlank()) && (location == null || location.isEmpty() || location.isBlank())) {
       return convertToOutputPositionsDto(positionRepository.findAll());
     }
     if (keyWord != null) {
