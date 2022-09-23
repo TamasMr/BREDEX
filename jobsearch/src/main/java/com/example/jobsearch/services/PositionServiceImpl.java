@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
 public class PositionServiceImpl implements PositionService {
 
   private final PositionRepository positionRepository;
-  private final ClientRepository clientRepository;
+  private final ClientServiceImpl clientService;
   private final ModelMapper modelMapper = new ModelMapper();
 
   @Autowired
-  public PositionServiceImpl(PositionRepository positionRepository, ClientRepository clientRepository) {
+  public PositionServiceImpl(PositionRepository positionRepository, ClientServiceImpl clientService) {
     this.positionRepository = positionRepository;
-    this.clientRepository = clientRepository;
+    this.clientService = clientService;
   }
 
   @Override
@@ -65,7 +65,7 @@ public class PositionServiceImpl implements PositionService {
   }
 
   private void validateApiKey(String apiKey) {
-    if (!clientRepository.existsByApiKey(apiKey)) {
+    if (!clientService.checkIfApiKeyExists(apiKey)) {
       throw new InvalidApiKeyException("Wrong Api Key!");
     }
   }

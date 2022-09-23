@@ -2,6 +2,8 @@ package com.example.jobsearch;
 
 import com.example.jobsearch.repositories.ClientRepository;
 import com.example.jobsearch.repositories.PositionRepository;
+import com.example.jobsearch.services.ClientService;
+import com.example.jobsearch.services.ClientServiceImpl;
 import com.example.jobsearch.services.DBPopulaterImpl;
 import com.example.jobsearch.services.DBPopulater;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,8 @@ public class JobsearchApplication implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
-    DBPopulater dbPopulate = new DBPopulaterImpl(clientRepository, positionRepository);
+    ClientService clientService = new ClientServiceImpl(clientRepository);
+    DBPopulater dbPopulate = new DBPopulaterImpl(clientRepository, positionRepository, clientService);
     dbPopulate.populateDB();
     System.out.println("Application started");
   }

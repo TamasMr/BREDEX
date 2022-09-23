@@ -6,7 +6,10 @@ import com.example.jobsearch.exceptions.InvalidEmailException;
 import com.example.jobsearch.exceptions.InvalidNameException;
 import com.example.jobsearch.models.Client;
 import com.example.jobsearch.repositories.ClientRepository;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class ClientServiceImpl implements ClientService {
 
   private final ClientRepository clientRepository;
+  private HashMap<String, Client> apiKeys = new HashMap<>();
 
   @Autowired
   public ClientServiceImpl(ClientRepository clientRepository) {
@@ -21,17 +25,28 @@ public class ClientServiceImpl implements ClientService {
   }
 
   @Override
+  public void addApiKeys(String apiKey, Client client) {
+    apiKeys.put(apiKey, client);
+  }
+
+  public List<String> getApiKeys() {
+    return apiKeys.keySet().stream().collect(Collectors.toList());
+  }
+
+  @Override
   public OutputApiKeyDTO saveClient(InputClientDTO inputClientDto) {
     validateInputClientDto(inputClientDto);
     UUID apiKey = createApiKey();
-    Client clientToSave = new Client(inputClientDto.getClientName(), inputClientDto.getClientEmail(), apiKey.toString());
+    Client clientToSave = new Client(inputClientDto.getClientName(), inputClientDto.getClientEmail());
     clientRepository.save(clientToSave);
-    return new OutputApiKeyDTO(clientToSave.getApiKey());
+    apiKeys.put(apiKey.toString(), clientToSave);
+    System.out.println(getApiKeys());
+    return new OutputApiKeyDTO(apiKey.toString());
   }
 
   private UUID createApiKey() {
     UUID key = UUID.randomUUID();
-    while (clientRepository.existsByApiKey(key.toString())) {
+    while (checkIfApiKeyExists(key.toString())) {
       key = UUID.randomUUID();
     }
     return key;
@@ -63,5 +78,10 @@ public class ClientServiceImpl implements ClientService {
     if (name.length() > 100) {
       throw new InvalidNameException("Name must be shorter than 100 characters!");
     }
+  }
+
+  @Override
+  public boolean checkIfApiKeyExists(String apiKey) {
+    return apiKeys.containsKey(apiKey);
   }
 }

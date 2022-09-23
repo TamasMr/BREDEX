@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-  boolean existsByApiKey(String apikey);
-
   boolean existsByEmail(String email);
 }

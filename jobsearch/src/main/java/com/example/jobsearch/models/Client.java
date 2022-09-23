@@ -19,19 +19,12 @@ public class Client {
   private String clientName;
   @Column(length = 100, unique = true)
   private String email;
-  @Column(unique = true)
-  private String apiKey;
 
   public Client() {
   }
 
-  public Client(String clientName, String email, String apiKey) {
+  public Client(String clientName, String email) {
     this.clientName = clientName;
     this.email = email;
-    this.apiKey = apiKey;
-  }
-
-  public String getApiKey() {
-    return apiKey;
   }
 }
