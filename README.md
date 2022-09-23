@@ -22,11 +22,11 @@ Készítsen rövid leírást az alkalmazásról, hogyan és milyen eszközökkel
 
 Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2, illetve mysql lehetőségek), .env-ben lehet beállítani környezeti változókat (jelenleg feltöltöttem .env-et is, de normál esetben ezt .gitignoreba teszem).
 
-/client - needs json input clientName and clientEmail
+/client - needs json input clientName and clientEmail (name and email max 100 characters, email must not be already saved one)
 
-/position - (needs json input jobPosition and location) and apiKey as queryparam
+/position - (needs json input jobPosition and location, both max 50 characters) and apiKey as queryparam
 
-/position/search - needs keyWord, location, apiKey as queryparams. keyWord and location are not needed, can be empty or blank. If both are, then returns all positions.
+/position/search - needs keyWord, location, apiKey as queryparams. keyWord and location are not needed, can be null, empty or blank. If both are empty/blank/null, then returns all positions.
 
 /position/{id} - needs id
 
