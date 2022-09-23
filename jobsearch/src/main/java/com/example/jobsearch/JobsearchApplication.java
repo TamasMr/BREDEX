@@ -1,11 +1,9 @@
 package com.example.jobsearch;
 
-import com.example.jobsearch.models.Client;
-import com.example.jobsearch.models.Position;
 import com.example.jobsearch.repositories.ClientRepository;
 import com.example.jobsearch.repositories.PositionRepository;
-import java.net.URL;
-import java.util.Collections;
+import com.example.jobsearch.services.DBPopulaterImpl;
+import com.example.jobsearch.services.DBPopulater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -13,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -56,20 +53,8 @@ public class JobsearchApplication implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
-    clientRepository.save(new Client("Sarah Parker", "sarah-parker.work@gmail.cam", "eb9982ff-ef5f-4218-994a-2dacdf9cad08"));
-    clientRepository.save(new Client("Edward Parker", "edward-parker.work@gmail.cam", "b8f7d459-5033-47d2-880f-0fedd959ceb5"));
-    clientRepository.save(new Client("Blake Johnson", "blake-johnson.home@gmail.can", "70357d90-c858-4b03-b0e2-05e66329f0ce"));
-    clientRepository.save(new Client("Gregory Karlberg", "gregory-karlberg.work@gmail.con",
-        "7ee1bb79-9440-4466-aad8-3ac2d5267f91"));
-    clientRepository.save(new Client("Adam Sikorsky", "adam-sikorsky.work@gmail.con", "2c44bf66-073d-4f70-a002-9d55b8c04eee"));
-
-    positionRepository.save(
-        new Position("junior java developer", "budapest", new URL("https://whatever.com/budapest-junior_java_developer-1001")));
-    positionRepository.save(new Position("senior hr manager", "houston", new URL("https://whatever.com/houston-senior_hr_manager-1002")));
-    positionRepository.save(new Position("junior astronaut", "houston", new URL("https://whatever.com/houston-junior_astronaut-1003")));
-    positionRepository.save(
-        new Position("senior ufo spotter", "hannover", new URL("https://whatever.com/hannover-senior_ufo_spotter-1004")));
-    positionRepository.save(new Position("java dev", "braunschweig", new URL("https://whatever.com/braunschweig-java_dev-1005")));
+    DBPopulater dbPopulate = new DBPopulaterImpl(clientRepository, positionRepository);
+    dbPopulate.populateDB();
     System.out.println("Application started");
   }
 }

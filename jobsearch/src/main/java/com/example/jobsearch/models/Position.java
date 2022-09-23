@@ -33,12 +33,6 @@ public class Position {
     this.location = location;
   }
 
-  public Position(String jobPosition, String location, URL url) {
-    this.jobPosition = jobPosition;
-    this.location = location;
-    this.url = url;
-  }
-
   public Long getId() {
     return id;
   }
