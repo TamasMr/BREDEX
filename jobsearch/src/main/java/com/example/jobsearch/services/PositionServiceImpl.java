@@ -8,7 +8,6 @@ import com.example.jobsearch.exceptions.InvalidJobPositionException;
 import com.example.jobsearch.exceptions.InvalidLocationException;
 import com.example.jobsearch.exceptions.InvalidPositionSearchException;
 import com.example.jobsearch.models.Position;
-import com.example.jobsearch.repositories.ClientRepository;
 import com.example.jobsearch.repositories.PositionRepository;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -73,7 +72,7 @@ public class PositionServiceImpl implements PositionService {
   @Override
   public List<OutputPositionDTO> searchForPositions(String apiKey, String keyWord, String location) {
     validateApiKey(apiKey);
-    if ((keyWord == null || keyWord.isEmpty() || keyWord.isBlank()) && (location == null || location.isEmpty() || location.isBlank())){
+    if ((keyWord == null || keyWord.isEmpty() || keyWord.isBlank()) && (location == null || location.isEmpty() || location.isBlank())) {
       return convertToOutputPositionsDto(positionRepository.findAll());
     }
     if (keyWord != null) {

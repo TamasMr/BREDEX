@@ -6,7 +6,5 @@ public interface DBPopulater {
 
   public void populateDB() throws MalformedURLException;
 
-  public void populateClients();
-
   public void populatePositions() throws MalformedURLException;
 }

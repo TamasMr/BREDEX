@@ -7,10 +7,10 @@ import com.example.jobsearch.exceptions.InvalidNameException;
 import com.example.jobsearch.models.Client;
 import com.example.jobsearch.repositories.ClientRepository;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,13 +24,23 @@ public class ClientServiceImpl implements ClientService {
     this.clientRepository = clientRepository;
   }
 
-  @Override
-  public void addApiKeys(String apiKey, Client client) {
-    apiKeys.put(apiKey, client);
-  }
-
-  public List<String> getApiKeys() {
-    return apiKeys.keySet().stream().collect(Collectors.toList());
+  @EventListener(ApplicationReadyEvent.class)
+  private void populateDBWithClients() {
+    Client client1 = new Client("Sarah Parker", "sarah-parker.work@gmail.cam");
+    clientRepository.save(client1);
+    apiKeys.put("eb9982ff-ef5f-4218-994a-2dacdf9cad08", client1);
+    Client client2 = new Client("Edward Parker", "edward-parker.work@gmail.cam");
+    clientRepository.save(client2);
+    apiKeys.put("b8f7d459-5033-47d2-880f-0fedd959ceb5", client2);
+    Client client3 = new Client("Blake Johnson", "blake-johnson.home@gmail.can");
+    clientRepository.save(client3);
+    apiKeys.put("70357d90-c858-4b03-b0e2-05e66329f0ce", client3);
+    Client client4 = new Client("Gregory Karlberg", "gregory-karlberg.work@gmail.con");
+    clientRepository.save(client4);
+    apiKeys.put("7ee1bb79-9440-4466-aad8-3ac2d5267f91", client4);
+    Client client5 = new Client("Adam Sikorsky", "adam-sikorsky.work@gmail.con");
+    clientRepository.save(client5);
+    apiKeys.put("2c44bf66-073d-4f70-a002-9d55b8c04eee", client5);
   }
 
   @Override
@@ -40,7 +50,6 @@ public class ClientServiceImpl implements ClientService {
     Client clientToSave = new Client(inputClientDto.getClientName(), inputClientDto.getClientEmail());
     clientRepository.save(clientToSave);
     apiKeys.put(apiKey.toString(), clientToSave);
-    System.out.println(getApiKeys());
     return new OutputApiKeyDTO(apiKey.toString());
   }
 

@@ -7,10 +7,6 @@ import java.util.List;
 
 public interface ClientService {
 
-  void addApiKeys(String apiKey, Client client);
-
-  List<String> getApiKeys();
-
   boolean checkIfApiKeyExists(String apiKey);
 
   OutputApiKeyDTO saveClient(InputClientDTO inputClientDto);

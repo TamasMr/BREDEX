@@ -2,8 +2,6 @@ package com.example.jobsearch;
 
 import com.example.jobsearch.repositories.ClientRepository;
 import com.example.jobsearch.repositories.PositionRepository;
-import com.example.jobsearch.services.ClientService;
-import com.example.jobsearch.services.ClientServiceImpl;
 import com.example.jobsearch.services.DBPopulaterImpl;
 import com.example.jobsearch.services.DBPopulater;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class JobsearchApplication implements ApplicationRunner {
 
-  private final ClientRepository clientRepository;
   private final PositionRepository positionRepository;
 
   @Autowired
-  public JobsearchApplication(ClientRepository clientRepository, PositionRepository positionRepository) {
-    this.clientRepository = clientRepository;
+  public JobsearchApplication(PositionRepository positionRepository) {
     this.positionRepository = positionRepository;
   }
 
@@ -55,8 +51,7 @@ public class JobsearchApplication implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments arg0) throws Exception {
-    ClientService clientService = new ClientServiceImpl(clientRepository);
-    DBPopulater dbPopulate = new DBPopulaterImpl(clientRepository, positionRepository, clientService);
+    DBPopulater dbPopulate = new DBPopulaterImpl(positionRepository);
     dbPopulate.populateDB();
     System.out.println("Application started");
   }
