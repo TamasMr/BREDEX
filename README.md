@@ -20,7 +20,7 @@ Készítsen rövid leírást az alkalmazásról, hogyan és milyen eszközökkel
 9. tesztek: unit, integration mindenképpen, security, environment.
 10. validateek: ha szétbontom jobban őket (pl emailt ellenőrző regexpet) lehet pontosabb visszajelzést is adni, hogy mi nem stimmel vele.
 
-Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2, illetve mysql lehetőségek), .env-ben lehet beállítani környezeti változókat.
+Application.properties-ben lehet beállítani milyen adatbázisból dolgozzon (jelenleg h2, illetve mysql lehetőségek), .env-ben lehet beállítani környezeti változókat (jelenleg feltöltöttem .env-et is, de normál esetben ezt .gitignoreba teszem).
 
 /client - needs json input clientName and clientEmail
 
