@@ -1,6 +1,7 @@
 package com.example.jobsearch.unittests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.example.jobsearch.dtos.InputClientDTO;
 import com.example.jobsearch.exceptions.InvalidEmailException;
@@ -29,89 +30,98 @@ class ClientServiceImplTest {
   @Test
   public void createUser_WithNullName_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO(null, "teszt-elek@gmail.com");
-    Throwable exception = assertThrows (InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give your name!", exception.getMessage());
   }
 
   @Test
   public void createUser_WithEmptyName_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("", "teszt-elek@gmail.com");
-    Throwable exception = assertThrows (InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give your name!", exception.getMessage());
   }
 
   @Test
   public void createUser_WithBlankName_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("  ", "teszt-elek@gmail.com");
-    Throwable exception = assertThrows (InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give your name!", exception.getMessage());
   }
 
   @Test
   public void createUser_WithTooLongName_ShouldThrowException() {
     StringBuilder stringBuilder = new StringBuilder();
-    while (stringBuilder.length()<=100){
+    while (stringBuilder.length() <= 100) {
       stringBuilder.append("a");
     }
     String name = stringBuilder.toString();
     InputClientDTO inputClientDTO = new InputClientDTO(name, "teszt-elek@gmail.com");
-    Throwable exception = assertThrows (InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidNameException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Name must be shorter than 100 characters!", exception.getMessage());
   }
 
-  @Test void createUser_WithExistingEmail_ShouldThrowException() {
+  @Test
+  void createUser_WithExistingEmail_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt-elek@gmail.com");
     String email = inputClientDTO.getClientEmail();
     Mockito.when(clientRepository.existsByEmail(email)).thenReturn(true);
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Email already registered!", exception.getMessage());
   }
 
-  @Test void createUser_WithInvalidCharacterInEmailAddress_ShouldThrowException() {
+  @Test
+  void createUser_WithInvalidCharacterInEmailAddress_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt#elek@gmail.com");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithInvalidCharacterInEmailDomain_ShouldThrowException() {
+  @Test
+  void createUser_WithInvalidCharacterInEmailDomain_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "tesztelek@gma+il.com");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithInvalidCharacterInEmailTopLevelDomain_ShouldThrowException() {
+  @Test
+  void createUser_WithInvalidCharacterInEmailTopLevelDomain_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt-elek@gmail.co~m");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithTwoAtInEmail_ShouldThrowException() {
+  @Test
+  void createUser_WithTwoAtInEmail_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt@elek@gmail.com");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithTwoSpecialCharactersInARowInEmail_ShouldThrowException() {
+  @Test
+  void createUser_WithTwoSpecialCharactersInARowInEmail_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt--elek@gmail.com");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithTooShortTopLevelDomainInEmail_ShouldThrowException() {
+  @Test
+  void createUser_WithTooShortTopLevelDomainInEmail_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "teszt-elek@gmail.c");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithEmailStartingWithSpecialCharacter_ShouldThrowException() {
+  @Test
+  void createUser_WithEmailStartingWithSpecialCharacter_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "-tesztelek@gmail.com");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 
-  @Test void createUser_WithEmailEndingWithSpecialCharacter_ShouldThrowException() {
+  @Test
+  void createUser_WithEmailEndingWithSpecialCharacter_ShouldThrowException() {
     InputClientDTO inputClientDTO = new InputClientDTO("Teszt Elek", "tesztelek@gmail.com-");
-    Throwable exception = assertThrows (InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
+    Throwable exception = assertThrows(InvalidEmailException.class, () -> clientService.saveClient(inputClientDTO));
     assertEquals("Please give a valid email address!", exception.getMessage());
   }
 }
