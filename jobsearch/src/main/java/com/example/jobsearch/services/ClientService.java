@@ -6,9 +6,9 @@ import com.example.jobsearch.models.Client;
 
 public interface ClientService {
 
-  void addApiKey(String apiKey, Client client);
-
   boolean checkIfApiKeyExists(String apiKey);
 
   OutputApiKeyDTO saveClient(InputClientDTO inputClientDto);
+
+  public void populateClients();
 }
