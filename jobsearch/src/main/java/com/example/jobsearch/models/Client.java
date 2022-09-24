@@ -1,6 +1,5 @@
 package com.example.jobsearch.models;
 
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
