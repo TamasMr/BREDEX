@@ -53,8 +53,7 @@ public class ClientServiceImpl implements ClientService {
       throw new InvalidEmailException("Email already registered!");
     }
     if (!email.matches(
-        "([a-zA-Z\\d]+[\\w\\d+~.\\-]*[a-zA-Z\\d]*)*[a-zA-Z\\d]+(@([a-zA-Z\\d]+[a-zA-Z\\d\\-]*[a-zA-Z\\d]*)*[a-zA-Z\\d]\\.([a-zA-Z]+[a-zA-Z-]*[a-zA-Z]+)+)$")
-        || email.matches("(.*)[^a-zA-Z\\d]{2,}(.*)")) {
+        "([a-zA-Z\\d]+[_+~.\\-]?)*[a-zA-Z\\d]+@([a-zA-Z\\d]+[-]?)*[a-zA-Z\\d]\\.([a-zA-Z]+[a-zA-Z-]*[a-zA-Z]+)+")) {
       throw new InvalidEmailException("Please give a valid email address!");
     }
   }
