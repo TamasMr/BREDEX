@@ -18,7 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 class ClientServiceImplTest {
 
   private final ClientRepository clientRepository = Mockito.mock(ClientRepository.class);
-  private final ClientService clientService = new ClientServiceImpl(clientRepository);
+  private final ClientService clientService = new ClientServiceImpl(clientRepository, hashApiKey);
 
   @Test
   public void createUser_WithValidInputs_ShouldSaveEntityOnce() {

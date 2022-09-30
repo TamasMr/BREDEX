@@ -1,6 +1,9 @@
 package com.example.jobsearch.services;
 
+import com.example.jobsearch.exceptions.ApiKeyHashingException;
 import java.net.MalformedURLException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -22,7 +25,13 @@ public class DBPopulaterImpl implements DBPopulater {
   @Override
   public void populateDB() throws MalformedURLException {
     positionService.populatePositions();
-    clientService.populateClients();
+    try {
+      clientService.populateClients();
+    } catch (NoSuchAlgorithmException e) {
+      throw new ApiKeyHashingException("Internal error, we are working on it!");
+    } catch (InvalidKeySpecException e) {
+      throw new ApiKeyHashingException("Internal error, we are working on it!");
+    }
     System.out.println("App started!");
   }
 }

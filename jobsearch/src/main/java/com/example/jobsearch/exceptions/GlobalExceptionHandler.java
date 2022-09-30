@@ -19,4 +19,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
   public ResponseEntity<String> handleInvalidPositionSearchException(InvalidPositionSearchException invalidPositionSearchException) {
     return new ResponseEntity(new SimpleErrorDTO(invalidPositionSearchException.getMessage()), HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(ApiKeyHashingException.class)
+  public ResponseEntity<String> handleApiKeyHashingException(ApiKeyHashingException apiKeyHashingException) {
+    return new ResponseEntity(new SimpleErrorDTO(apiKeyHashingException.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+  }
 }
