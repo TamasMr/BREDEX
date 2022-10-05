@@ -3,6 +3,7 @@ package com.example.jobsearch.controllers;
 import com.example.jobsearch.dtos.InputClientDTO;
 import com.example.jobsearch.dtos.OutputApiKeyDTO;
 import com.example.jobsearch.services.ClientService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,11 @@ public class ClientController {
   }
 
   @PostMapping("")
-  public ResponseEntity<OutputApiKeyDTO> createNewClient(@RequestBody InputClientDTO newUser) {
-    return ResponseEntity.status(201).body(clientService.saveClient(newUser));
+  @ApiOperation(
+      value = "Creates a new Client, returns with api key.",
+      notes = "Please provide Client information in json."
+  )
+  public ResponseEntity<OutputApiKeyDTO> createNewClient(@RequestBody InputClientDTO newClient) {
+    return ResponseEntity.status(201).body(clientService.saveClient(newClient));
   }
 }
