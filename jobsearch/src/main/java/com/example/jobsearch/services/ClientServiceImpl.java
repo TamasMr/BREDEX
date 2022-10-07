@@ -85,13 +85,15 @@ public class ClientServiceImpl implements ClientService {
     String[] apiKeysArray = apiKeys.keySet().toArray(new String[0]);
     System.out.println();
     System.out.println("Apikey list: " + Arrays.stream(apiKeysArray).collect(Collectors.toList()));
+    // just to check if api key is stored hashed
     System.out.println();
     try {
       for (int i = 0; i < apiKeysArray.length; i++) {
         if (hashApiKey.validateApiKey(apiKey, apiKeysArray[i])) {
           return true;
         }
-      }
+      } // need to find a way to skip looping through api keys and decode all. Like adding a counter/id to api key and store it uncoded,
+      // search by it, and check only that one.
     } catch (NoSuchAlgorithmException e) {
       throw new ApiKeyHashingException("Internal error, we are working on it!");
     } catch (InvalidKeySpecException e) {
